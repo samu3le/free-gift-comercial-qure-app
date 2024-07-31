@@ -1,0 +1,28 @@
+query RunInput {
+  cart {
+    lines {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+      productFree: attribute(key: "_required_validation") {
+        value
+      }
+      merchandise {
+        __typename
+        ... on ProductVariant {
+          id
+          title
+          isFreeValidated: metafield(namespace: "free", key: "is_free") {
+            type
+            value
+          }
+        }
+      }
+    }
+  }
+}
+
